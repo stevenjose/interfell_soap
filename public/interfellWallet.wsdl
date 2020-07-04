@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<definitions name="MyDefinition" targetNamespace="urn:myTargetNamespace" 
+    xmlns:tns="urn:myTns" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <message name="registrarCliente">
+        <part name="nombres" type="xsd:string"/>
+        <part name="email" type="xsd:string"/>
+        <part name="celular" type="xsd:string"/>
+        <part name="documento" type="xsd:string"/>
+    </message>
+
+    <message name="recargarBilletera">
+        <part name="monto" type="xsd:string"/>
+        <part name="celular" type="xsd:string"/>
+        <part name="documento" type="xsd:string"/>
+    </message>
+
+    <message name="pagarCompra">
+        <part name="monto" type="xsd:string"/>
+        <part name="documento" type="xsd:string"/>
+    </message>
+
+    <message name="confirmarPago">
+        <part name="idSesion" type="xsd:string"/>
+        <part name="token" type="xsd:string"/>
+    </message>
+
+    <message name="consultarSaldo">
+        <part name="celular" type="xsd:string"/>
+        <part name="documento" type="xsd:string"/>
+    </message>
+
+    <message name="response">
+        <part name="resParam2" type="xsd:string"/>
+    </message>
+
+    <portType name="PortType">
+
+        <operation name="registrarCliente" parameterOrder="nombres email celular documento">
+            <input message="tns:registrarCliente"/>
+            <output message="tns:response"/>
+        </operation>
+
+        <operation name="recargarBilletera" parameterOrder="monto celular documento">
+            <input message="tns:recargarBilletera"/>
+            <output message="tns:response"/>
+        </operation>
+
+        <operation name="pagarCompra" parameterOrder="monto documento">
+            <input message="tns:pagarCompra"/>
+            <output message="tns:response"/>
+        </operation>
+
+        <operation name="confirmarPago" parameterOrder="idSesion token">
+            <input message="tns:confirmarPago"/>
+            <output message="tns:response"/>
+        </operation>
+
+        <operation name="consultarSaldo" parameterOrder="celular documento">
+            <input message="tns:consultarSaldo"/>
+            <output message="tns:response"/>
+        </operation>
+
+
+    </portType>
+    <binding name="binding" type="tns:PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="registrarCliente">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="urn:myInputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:myOutputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+
+        <operation name="recargarBilletera">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="urn:myInputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+
+            <output>
+                <soap:body use="encoded" namespace="urn:myOutputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+
+        <operation name="pagarCompra">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="urn:myInputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+
+            <output>
+                <soap:body use="encoded" namespace="urn:myOutputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+
+
+        <operation name="confirmarPago">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="urn:myInputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+
+            <output>
+                <soap:body use="encoded" namespace="urn:myOutputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+
+        <operation name="consultarSaldo">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal" namespace="urn:myInputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+
+            <output>
+                <soap:body use="encoded" namespace="urn:myOutputNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+
+    </binding>
+    <service name="service">
+
+        <port name="Port" binding="tns:binding">
+            <soap:address location="http://localhost:8000/interfellWallet"/>
+        </port>
+    </service>
+</definitions>
